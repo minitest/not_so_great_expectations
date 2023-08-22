@@ -1,0 +1,10 @@
+History.rdoc
+Manifest.txt
+README.rdoc
+Rakefile
+lib/even_worse_expectations.rb
+lib/not_so_great_expectations.rb
+lib/to_kill_a_mocking_lib.rb
+test/test_even_worse_expectations.rb
+test/test_not_so_great_expectations.rb
+test/test_to_kill_a_mocking_lib.rb

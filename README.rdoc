@@ -1,0 +1,130 @@
+= not_so_great_expectations
+
+home :: https://github.com/seattlerb/not_so_great_expectations
+rdoc :: https://docs.seattlerb.org/not_so_great_expectations
+
+== DESCRIPTION:
+
+not_so_great_expectations is a set of rubocop cops to help transform
+your tests.
+
+=== even_worse_expectations.rb
+
+Helps convert rspec to minitest/spec.
+
+This will probably never be complete, but it tries to get you most of
+the way there.
+
+=== not_so_great_expectations.rb
+
+Converts from minitest/spec "expectation" forms to "spec-assert"
+style:
+
+    # very bad
+    musts.must_equal expected_musts
+    wonts.wont_match expected_wonts
+    proc { musts }.must_raise TypeError
+
+    # bad
+    _(musts).must_equal expected_musts
+    _(wonts).wont_match expected_wonts
+    _ { musts }.must_raise TypeError
+
+    expect(musts).must_equal expected_musts
+    expect(wonts).wont_match expected_wonts
+    expect { musts }.must_raise TypeError
+
+    value(musts).must_equal expected_musts
+    value(wonts).wont_match expected_wonts
+    value { musts }.must_raise TypeError
+
+    # good
+    assert_equal expected_musts, musts
+    refute_match expected_wonts, wonts
+    assert_raises(TypeError) { musts }
+
+=== to_kill_a_mocking_lib.rb:
+
+Helps convert from rspec-mocks to mocha.
+
+This will probably never be complete, but it tries to get you most of
+the way there.
+
+== FEATURES/PROBLEMS:
+
+* Has 3 cops to help transform your specs from rspec to "spec-assert" style minitest expectations:
+  * even_worse_expectations.rb: helps convert rspec to minitest/spec.
+  * not_so_great_expectations.rb: converts from minitest/spec "expectation" forms to "spec-assert" style
+  * to_kill_a_mocking_lib.rb: helps convert from rspec-mocks to mocha.
+
+== GETTING STARTED:
+
+1. Add not_so_great_expectations to your project's Gemfile:
+
+```ruby
+  gem 'not_so_great_expectations'
+```
+2. Add configuration to your project's rubocop.yml:
+
+```yaml
+require:
+  - ../lib/not_so_great_expectations.rb
+  - ../lib/even_worse_expectations.rb
+
+Minitest/NotSoGreatExpectations:
+  Enabled: false
+Minitest/EvenWorseExpectations:
+  Enabled: false
+```
+3. Enable one cop that you want to use.
+
+Enable EvenWorseExpectations if you're migrating from rspec to
+minitest.
+
+Enable NotSoGreatExpectations if you're migrating from minitest's
+spec-expectation style to spec-assert style.
+
+4. Run rubocop
+
+```
+% rubocop --only $COP test/one_path_at_a_time.rb
+# or
+% rubocop --only $COP test/one_directory
+
+```
+If the output looks good to you, then you can run with --autocorrect.
+
+Run the new tests and correct any failures.
+
+== REQUIREMENTS:
+
+* rubocop
+
+== INSTALL:
+
+* gem install not_so_great_expectations
+
+== LICENSE:
+
+(The MIT License)
+
+Copyright (c) Ryan Davis, seattle.rb
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
