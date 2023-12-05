@@ -13,46 +13,25 @@ AllCops:
   DisplayStyleGuide: true
   TargetRubyVersion: 2.7
   Include:
-    - 'spec*/**/*.rb'
+    - 'spec*/**/*'
+
+Minitest:
+  Include:
+    - '**/test/**/*'
+    - '**/*_test.rb'
+    - 'spec*/**/*'
 
 Metrics:
   Enabled: false
 
-Lint/SuppressedException:
+Layout:
   Enabled: false
 
-Layout/EndAlignment:
-  EnforcedStyleAlignWith: variable
-
-Style/BlockDelimiters:
-  Exclude: ['test/**/*']
-
-Style/DoubleNegation:
+Lint:
   Enabled: false
 
-Layout/LineLength:
+Naming:
   Enabled: false
 
-Style/Documentation:
-  Enabled: false
-
-Style/NumericLiterals: # A lot of the numbers are object IDs, file sizes, or date times.
-  Enabled: false
-
-Lint/MissingSuper: # When using method_missing, fall back on super.
-  Enabled: false
-
-Style/MissingRespondToMissing: # When using method_missing, define respond_to_missing?.
-  Enabled: false
-
-Style/AccessModifierDeclarations: # private should not be inlined in method definitions.
-  Enabled: false
-
-Naming/MemoizedInstanceVariableName: # Memoized variable does not match method name.
-  Enabled: false
-
-Security/YAMLLoad: # Using YAML.safe_load over YAML.load produced some spec failures
-  Enabled: false
-
-Style/HashTransformValues: # Prefer transform_values over Hash[_.map {...}].
+Style:
   Enabled: false
